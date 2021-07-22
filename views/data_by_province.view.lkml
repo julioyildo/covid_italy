@@ -1,10 +1,11 @@
-include: "/views/national_trends.view"
+# include: "/views/national_trends.view"
 
 view: data_by_province {
-  sql_table_name: `covid_italy.data_by_province`;;
-  label: "Italy Data By Province"
 
-  extends: [national_trends]
+  sql_table_name: `covid_italy.data_by_province`;;
+  # label: "Italy Data By Province"
+
+  # extends: [national_trends]
 
 
 
@@ -14,7 +15,7 @@ view: data_by_province {
     type: string
     map_layer_name: countries
     sql: ${TABLE}.country ;;
-    required_access_grants: [province_code_access_grant]
+
   }
 
   dimension_group: date {
@@ -81,21 +82,25 @@ view: data_by_province {
     sql: ${TABLE}.confirmed_cases ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [region_name, province_name]
-  }
 
-  measure: Total_province_confirmed_cases {
-    type: sum
-    sql: ${TABLE}.confirmed_cases ;;
-  }
 
-  measure: Total_national_confirmed_case {
-    type: sum
-    sql: ${national_trends.total_confirmed_cases}  ;;
-    required_access_grants: [province_code_access_grant]
-  }
+
+# MESURES
+  # measure: count {
+  #   type: count
+  #   drill_fields: [region_name, province_name]
+  # }
+
+  # measure: Total_province_confirmed_cases {
+  #   type: sum
+  #   sql: ${TABLE}.confirmed_cases ;;
+  # }
+
+  # measure: Total_national_confirmed_case {
+  #   type: sum
+  #   sql: ${national_trends.total_confirmed_cases}  ;;
+  #   required_access_grants: [country_access_grant]
+  # }
 
 
 }
